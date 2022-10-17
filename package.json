@@ -16,12 +16,19 @@
     "format": "prettier --write .",
     "test-all": "yarn check-format && yarn check-lint && yarn check-types && yarn build",
     "prepare": "husky install",
-    "main-push": "git push origin main"
+    "main-push": "git push -u obiport_TECH",
+    "watchTailwind": "npx tailwindcss -i ./styles/globals.css -o ./dist/output.css --watch",
+    "codeMode": "yarn run dev && yarn run watchTailwind"
   },
   "dependencies": {
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "autoprefixer": "^10.4.12",
+    "framer-motion": "^7.5.4",
+    "next": "^12.3.1",
+    "postcss": "^8.4.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-social-icons": "^5.15.0",
+    "tailwindcss": "^3.1.8"
   },
   "devDependencies": {
     "@types/node": "17.0.22",

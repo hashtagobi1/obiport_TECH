@@ -2,21 +2,43 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 // interface Props {}
 
-const LeftNavInitial = {
-  x: -500,
-  opacity: 0,
-  scale: 0.1,
+const renderLink = (link: string) => {
+  return (
+    <div className="mr-5 hover:underline ease-in-out transition-all duration-1000">
+      <Link passHref href={`/${link}`} className="">
+        {link}
+      </Link>
+    </div>
+  );
 };
 
 const Header = () => {
   return (
-    <header className="sticky top-0 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center p-5 ">
+    <motion.header
+      initial={{
+        // opacity: 0,
+        y: -100,
+      }}
+      animate={{
+        // opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 1,
+      }}
+      className="sticky shadow-xl top-0 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center p-5 "
+    >
       <motion.div
         className="flex flex-row items-center"
-        initial={LeftNavInitial}
+        initial={{
+          x: -500,
+          opacity: 0,
+          scale: 0.1,
+        }}
         animate={{
           x: 0,
           opacity: 1,
@@ -26,28 +48,14 @@ const Header = () => {
           duration: 1.3,
         }}
       >
-        <div className="mr-5">
+        <div className="p-1">
           <Image
             src={"/images/obi_logo.png"}
             alt={"obi logo"}
-            width={"100"}
-            height={"60"}
+            width={"50"}
+            height={"30"}
           />
         </div>
-        <div className="mr-5"> projects</div>
-        <div className="mr-5"> blog</div>
-        <SocialIcon
-          fgColor="#dee"
-          bgColor="#000"
-          className="mr-5"
-          url="https://www.linkedin.com/in/obinna-anokwuru-647231149/"
-        />
-        <SocialIcon
-          fgColor="#000"
-          bgColor="#dee"
-          className="mr-5"
-          url="https://www.twitter.com/obiwritescode/"
-        />
       </motion.div>
 
       <motion.div
@@ -74,7 +82,7 @@ const Header = () => {
         />
         <p className="uppercase hidden md:inline-flex text-sm">lets talk</p>
       </motion.div>
-    </header>
+    </motion.header>
   );
 };
 

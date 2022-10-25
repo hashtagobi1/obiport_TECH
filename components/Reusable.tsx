@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const SectionTitle: FC<{ title: string }> = ({ title }) => {
   return (
-    <h3 className="absolute top-24 uppercase tracking-[30px] font-bold text-center text-gray-500 text-4xl">
+    <h3 className="absolute top-24 uppercase tracking-[24px] font-bold text-center text-gray-500 text-4xl">
       {title}
     </h3>
   );
@@ -50,7 +50,7 @@ export const ExperienceCard: FC<{
         alt="logo"
       />
 
-      <div className="px-0 md:px-10 h-96   overflow-y-auto ">
+      <div className="px-0 md:px-10 h-96   overflow-y-auto customScrollBar">
         <h4 className="text-4xl font-light text-center">{jobTitle}</h4>
         <p className="font-bold text-2xl mt-1 text-center">{company}</p>
         <div className="flex space-x-2 my-2 items-center justify-center">

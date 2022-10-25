@@ -6,4 +6,12 @@
   .heroButton {
     @apply px-6 py-2 border  border-[#242424] rounded-md capitalize text-sm tracking-widest text-gray-700 font-bold transition-all hover:text-white hover:bg-black duration-500;
   }
+
+  .contactInput {
+    @apply outline-none  text-white duration-500  hover:border-[#F7AB0A]  transition-all focus:border-[#F7AB0A] focus:text-[#F7AB0A]  bg-black/80 rounded-l-lg border-slate-600/10 px-6 py-4 border-[#141414];
+  }
+
+  .customScrollBar {
+    @apply scrollbar  scrollbar-track-gray-300/20 scrollbar-thumb-black;
+  }
 }

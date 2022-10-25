@@ -58,30 +58,32 @@ const Header = () => {
         </div>
       </motion.div>
 
-      <motion.div
-        className="flex flex-row items-center  justify-between cursor-pointer "
-        initial={{
-          x: 500,
-          opacity: 0,
-          scale: 0.1,
-        }}
-        animate={{
-          x: 0,
-          opacity: 1,
-          scale: 1,
-        }}
-        transition={{
-          duration: 1.8,
-        }}
-      >
-        <SocialIcon
-          className=" border rounded-full animate-pulse md:mr-5"
-          network="email"
-          fgColor="gray"
-          bgColor="#fff"
-        />
-        <p className="uppercase hidden md:inline-flex text-sm">lets talk</p>
-      </motion.div>
+      <Link passHref href="#contact">
+        <motion.div
+          className="flex flex-row items-center  justify-between cursor-pointer "
+          initial={{
+            x: 500,
+            opacity: 0,
+            scale: 0.1,
+          }}
+          animate={{
+            x: 0,
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            duration: 1.8,
+          }}
+        >
+          <SocialIcon
+            className=" border rounded-full animate-pulse md:mr-5"
+            network="email"
+            fgColor="gray"
+            bgColor="#fff"
+          />
+          <p className="uppercase hidden md:inline-flex text-sm">lets talk</p>
+        </motion.div>
+      </Link>
     </motion.header>
   );
 };

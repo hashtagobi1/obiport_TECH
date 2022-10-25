@@ -69,7 +69,7 @@ const Hero = (props: Props) => {
         variants={heroContainer}
         initial="hidden"
         animate="show"
-        className="flex shadow-inner flex-col items-center h-full my-10 justify-center border max-w-4xl mx-auto p-5"
+        className="flex  shadow-2xl flex-col items-center h-screen my-10 justify-center max-w-4xl mx-auto p-5"
       >
         <motion.div variants={item} className="text-center space-y-5">
           <h2 className="uppercase  text-2xl underline font-bold">

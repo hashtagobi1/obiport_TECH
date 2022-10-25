@@ -111,3 +111,48 @@ export const Skill: FC<{ directionLeft?: boolean }> = ({ directionLeft }) => {
     </div>
   );
 };
+
+import React from "react";
+
+type Props = {};
+
+export const ProjectCard: FC<{ projLength: number; projIndex: number }> = ({
+  projLength,
+  projIndex,
+}) => {
+  return (
+    <div className="w-screen  flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen">
+      <motion.img
+        initial={{
+          y: -300,
+          opacity: 0.4,
+        }}
+        transition={{ duration: 1.2 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        src="/images/ts.png"
+        alt="the image"
+        className="object-cover h-12 w-12"
+      />
+      <div className="space-y-10 px-0 md:px-10 max-w-6xl ">
+        <h4 className="text-4xl  text-center">
+          <span className="">
+            Case Study {projIndex} of {projLength}:{" "}
+          </span>
+          <span className="underline font-semibold decoration-[#F7AB0a]/50 underline-offset-4">
+            Thing Clone
+          </span>
+        </h4>
+
+        <p className="text-justify text-lg text-center md:text-left">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam alias
+          fugiat facere tempora culpa, voluptate recusandae deleniti laboriosam
+          itaque corrupti, consequuntur hic iusto qui labore quibusdam facilis,
+          animi cupiditate odio!
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default ProjectCard;

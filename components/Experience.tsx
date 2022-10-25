@@ -7,7 +7,10 @@ type Props = {};
 
 const Experience: FC<{}> = ({ children }) => {
   return (
-    <SectionContainer otherClasses="overflow-hidden">
+    <SectionContainer
+      classes="overflow-hidden h-screen flex  relative flex-col text-center 
+        md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center"
+    >
       <SectionTitle title="experience" />
       <div className="w-full flex flex-row space-x-5 overflow-x-scroll p-10 snap-x snap-mandatory">
         <ExperienceCard company="netflix" jobTitle="worker" />

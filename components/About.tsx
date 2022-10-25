@@ -6,7 +6,10 @@ type Props = {};
 
 const About = (props: Props) => {
   return (
-    <SectionContainer>
+    <SectionContainer
+      classes="h-screen flex relative flex-col text-center 
+        md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center"
+    >
       <SectionTitle title="about" />
 
       <motion.img

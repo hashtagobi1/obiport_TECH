@@ -10,14 +10,13 @@ export const SectionTitle: FC<{ title: string }> = ({ title }) => {
   );
 };
 
-export const SectionContainer: FC<{ otherClasses?: string }> = ({
+export const SectionContainer: FC<{ classes: string }> = ({
   children,
-  otherClasses,
+  classes,
 }) => {
   return (
     <motion.div
-      className={`h-screen flex  relative flex-col text-center 
-        md:text-left md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center ${otherClasses}`}
+      className={` ${classes}`}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
@@ -51,15 +50,17 @@ export const ExperienceCard: FC<{
         alt="logo"
       />
 
-      <div className="px-0 md:px-10">
-        <h4 className="text-4xl font-light">{jobTitle}</h4>
-        <p className="font-bold text-2xl mt-1">{company}</p>
-        <div className="flex space-x-2 my-2">
+      <div className="px-0 md:px-10 h-96   overflow-y-auto ">
+        <h4 className="text-4xl font-light text-center">{jobTitle}</h4>
+        <p className="font-bold text-2xl mt-1 text-center">{company}</p>
+        <div className="flex space-x-2 my-2 items-center justify-center">
           <img className="h-10 w-10 rounded-full" src="/images/ts.png" />
           <img className="h-10 w-10 rounded-full" src="/images/ts.png" />
           <img className="h-10 w-10 rounded-full" src="/images/ts.png" />
         </div>
-        <p className="uppercase py-5 text-gray-800">Started worked</p>
+        <p className="uppercase py-5 text-gray-800 text-center">
+          Started worked
+        </p>
         <ul className="list-disc space-y-4 ml-5 text-lg">
           <li>
             Summary PointsSummary PointsSummary PointsSummary PointsSummary
@@ -84,5 +85,29 @@ export const ExperienceCard: FC<{
         </ul>
       </div>
     </article>
+  );
+};
+
+export const Skill: FC<{ directionLeft?: boolean }> = ({ directionLeft }) => {
+  return (
+    <div className="group relative flex cursor-pointer ">
+      <motion.img
+        initial={{
+          x: directionLeft ? -200 : 200,
+          opacity: 0,
+        }}
+        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        src="/images/firebase.png"
+        className="h-12 w-12 md:h-24 md:w-24 rounded-full border-gray-500 object-cover filter group-hover:grayscale duration-500 transition-all ease-in-out"
+        alt="skilllogo"
+      />
+
+      <div className="absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-12 w-12 md:h-24 md:w-24 rounded-full z-0">
+        <div className="flex items-center justify-center h-full">
+          <p className="text-xl font-bold text-black opactiy-100">100%</p>
+        </div>
+      </div>
+    </div>
   );
 };

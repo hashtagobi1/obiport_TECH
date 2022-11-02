@@ -1,9 +1,8 @@
-import React from "react";
+import { FC } from "react";
+import { Skill as SkillProps } from "../utils/typings";
 import { SectionContainer, SectionTitle, Skill } from "./Reusable";
 
-type Props = {};
-
-const Skills = (props: Props) => {
+const Skills: FC<{ skills: SkillProps[] }> = ({ skills }) => {
   return (
     <SectionContainer classes="flex relative flex-col text-center md:text-left xl:flex-row max-w-[2000px] xl:px-10 min-h-screen justify-center xl:space-y-0 mx-auto items-center">
       <SectionTitle title="skills" />
@@ -13,28 +12,15 @@ const Skills = (props: Props) => {
       </h3>
 
       <div className="grid grid-cols-4 gap-5">
-        <Skill directionLeft={true} />
-        <Skill directionLeft={true} />
-        <Skill directionLeft={true} />
-        <Skill directionLeft={true} />
-        <Skill directionLeft={true} />
-        <Skill directionLeft={true} />
-        <Skill directionLeft={true} />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
-        <Skill />
+        {skills.map((skill: SkillProps, i: number) => {
+          return (
+            <Skill
+              skill={skill}
+              directionLeft={i % 2 === 0 ? true : false}
+              key={i}
+            />
+          );
+        })}
       </div>
     </SectionContainer>
   );

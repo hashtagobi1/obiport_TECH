@@ -1,9 +1,12 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { SectionContainer, SectionTitle } from "./Reusable";
 import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { PageInfo } from "../utils/typings";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 type Inputs = {
   name: string;
   email: string;
@@ -11,7 +14,7 @@ type Inputs = {
   message: string;
 };
 
-const Contact = () => {
+const Contact: FC<Props> = ({ pageInfo }) => {
   const {
     register,
     handleSubmit,
@@ -19,7 +22,6 @@ const Contact = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
-    console.log({ formData });
     window.location.href = `mailto:anokwuruobi@gmail.com?subject=${formData.subject}&body=Hi Obi My name is ${formData.name}. ${formData.message} (${formData.email})`;
   };
 
@@ -47,9 +49,11 @@ const Contact = () => {
         </h4>
 
         <div className="space-y-10 ">
-          {<IconText icon={<PhoneIcon />} text="12345678" />}
-          {<IconText icon={<EnvelopeIcon />} text="tubby@tubby.com" />}
-          {<IconText icon={<MapPinIcon />} text="10 Jack Street Lane" />}
+          {pageInfo.phoneNumber ? (
+            <IconText icon={<PhoneIcon />} text={pageInfo.phoneNumber} />
+          ) : null}
+          {<IconText icon={<EnvelopeIcon />} text={pageInfo.email ?? ""} />}
+          {<IconText icon={<MapPinIcon />} text={pageInfo.address ?? ""} />}
         </div>
       </div>
 

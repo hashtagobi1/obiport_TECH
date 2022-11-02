@@ -1,14 +1,17 @@
-import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { Social } from "../utils/typings";
+import { FC } from "react";
 
-// interface Props {}
+interface Props {
+  socials: Social[];
+}
 
 const renderLink = (link: string) => {
   return (
-    <div className="mr-5 hover:underline ease-in-out transition-all duration-1000">
+    <div className="mr-5 hover:underline ease-in-out transition-all duration-300">
       <Link passHref href={`/${link}`} className="">
         {link}
       </Link>
@@ -16,7 +19,7 @@ const renderLink = (link: string) => {
   );
 };
 
-const Header = () => {
+const Header: FC<Props> = ({ socials }) => {
   return (
     <motion.header
       initial={{
@@ -33,7 +36,7 @@ const Header = () => {
       className="sticky shadow-xl top-0 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center p-5 "
     >
       <motion.div
-        className="flex flex-row items-center"
+        className="flex flex-row items-center space-x-3 p-1"
         initial={{
           x: -500,
           opacity: 0,
@@ -48,19 +51,35 @@ const Header = () => {
           duration: 1.3,
         }}
       >
-        <div className="p-1">
-          <Image
-            src={"/images/obi_logo.png"}
-            alt={"obi logo"}
-            width={"50"}
-            height={"30"}
-          />
-        </div>
+        <Link passHref href="#hero">
+          <div>
+            <Image
+              src={"/images/obi_logo.png"}
+              alt={"obi logo"}
+              className="cursor-pointer"
+              width={"50"}
+              height={"30"}
+            />
+          </div>
+        </Link>
+
+        {socials.map((social, i) => {
+          return (
+            <Link passHref key={i} href={social.url ?? ""}>
+              <SocialIcon
+                fgColor="#000"
+                bgColor="#fff"
+                className=" scale-75 border rounded-full border-black/75"
+                url={social.url}
+              />
+            </Link>
+          );
+        })}
       </motion.div>
 
       <Link passHref href="#contact">
         <motion.div
-          className="flex flex-row items-center  justify-between cursor-pointer "
+          className="flex flex-row items-center   justify-between cursor-pointer "
           initial={{
             x: 500,
             opacity: 0,

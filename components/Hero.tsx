@@ -1,19 +1,20 @@
-import React, { Fragment } from "react";
-import { Cursor, Typewriter, useTypewriter } from "react-simple-typewriter";
-import { AnimationProps, motion, Variants } from "framer-motion";
+import { Fragment } from "react";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { PageInfo } from "../utils/typings";
+import { urlFor } from "../lib/sanity";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 
-const Hero = (props: Props) => {
+const Hero = ({ pageInfo }: Props) => {
   const [text, count] = useTypewriter({
-    words: [
-      "why hello there...?",
-      "i can build you a cool online experience",
-      "hit me up... :)",
-    ],
-
+    words: pageInfo.typeWriterText
+      ? pageInfo?.typeWriterText?.split(",")
+      : [""],
     loop: true,
     delaySpeed: 2000,
   });
@@ -33,7 +34,7 @@ const Hero = (props: Props) => {
       "Saturday",
     ];
 
-    return `${weekday[day]}: ${date} - ${month} - ${year}`;
+    return `${weekday[day]}: ${date} - ${month + 1} - ${year}`;
   };
 
   const heroContainer = {
@@ -73,10 +74,10 @@ const Hero = (props: Props) => {
       >
         <motion.div variants={item} className="text-center space-y-5">
           <h2 className="uppercase  text-2xl underline font-bold">
-            Front End Engineer
+            {pageInfo.role}
           </h2>
           <h2 className="text-xl">Coded By</h2>
-          <h2 className="text-xl uppercase">Obi</h2>
+          <h2 className="text-xl uppercase">{pageInfo.name}</h2>
           <h2 className="text-xl uppercase">{getDate()}</h2>
         </motion.div>
 
@@ -97,7 +98,7 @@ const Hero = (props: Props) => {
           <motion.div variants={item} className="mx-auto">
             <Image
               className="object-cover rounded-full self-center"
-              src="/images/profile.jpeg"
+              src={urlFor(pageInfo?.heroImage).url()}
               alt="profile pic"
               width="133"
               height="133"

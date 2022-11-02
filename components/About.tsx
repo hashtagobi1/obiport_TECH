@@ -1,10 +1,13 @@
-import React from "react";
+import { FC } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { SectionContainer, SectionTitle } from "./Reusable";
-type Props = {};
+import { PageInfo } from "../utils/typings";
+import { urlFor } from "../lib/sanity";
+type Props = {
+  pageInfo: PageInfo;
+};
 
-const About = (props: Props) => {
+const About: FC<Props> = ({ pageInfo }: Props) => {
   return (
     <SectionContainer
       classes="h-screen flex relative flex-col text-center 
@@ -13,8 +16,8 @@ const About = (props: Props) => {
       <SectionTitle title="about" />
 
       <motion.img
-        src="/images/profile.jpeg"
-        className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-96 xl:w-[500px] xl:h-[600px] "
+        src={urlFor(pageInfo?.profilePic).url()}
+        className="-mb-20 md:mb-0 flex-shrink-0 w-44 h-44 rounded-full object-cover md:rounded-lg md:w-64 md:h-80 xl:w-[500px] xl:h-[600px] "
         width="500"
         initial={{
           x: 150,
@@ -37,12 +40,7 @@ const About = (props: Props) => {
             me
           </span>
         </h4>
-        <p className="text-base text-justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          officiis obcaecati esse enim, deserunt quo corrupti nulla voluptates
-          vitae omnis ex eligendi quas tenetur possimus labore accusamus sed
-          ipsum perspiciatis?
-        </p>
+        <p className="text-base text-justify">{pageInfo.about}</p>
       </div>
     </SectionContainer>
   );

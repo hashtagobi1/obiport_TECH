@@ -8,7 +8,7 @@ const query = groq`*[_type == "experience"]{
 }`;
 
 type Data = {
-  experience: Experience[];
+  experience?: Experience[];
 };
 
 export default async function handler(

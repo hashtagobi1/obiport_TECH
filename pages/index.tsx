@@ -6,13 +6,13 @@ import Contact from "../components/Contact";
 import Experience from "../components/Experience";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Hero from "../components/Hero";
 import Skills from "../components/Skills";
-import {
-  fetchExperience,
-  fetchPageInfo,
-  fetchSkills,
-  fetchSocials,
-} from "../lib/fetchData";
+import { fetchExperience } from "../utils/fetchExperience";
+import { fetchPageInfo } from "../utils/fetchPageInfo";
+import { fetchSkills } from "../utils/fetchSkills";
+import { fetchSocials } from "../utils/fetchSocials";
+
 import {
   Experience as ExperienceProp,
   PageInfo,
@@ -21,14 +21,29 @@ import {
 } from "../utils/typings";
 
 type PageProps = {
-  pageInfo: PageInfo;
-  experiences: ExperienceProp[];
-  skills: Skill[];
-  socials: Social[];
+  pageInfo?: PageInfo;
+  experiences?: ExperienceProp[];
+  skills?: Skill[];
+  socials?: Social[];
 };
 
+export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
+  const pageInfo: PageInfo = await fetchPageInfo();
+  const experiences: ExperienceProp[] = await fetchExperience();
+  const skills: Skill[] = await fetchSkills();
+  const socials: Social[] = await fetchSocials();
+
+  return {
+    props: {
+      pageInfo,
+      experiences,
+      skills,
+      socials,
+    },
+    revalidate: 10,
+  };
+};
 const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
-  console.log({ pageInfo });
   return (
     <div
       className="font-typewriter bg-[#F8F8F8] h-screen snap-y snap-mandatory overflow-y-scroll 
@@ -40,33 +55,34 @@ const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {socials ? <Header socials={socials} /> : null}
       <main>
-        <Header socials={socials} />
-        {/* Hero */}
-        <section id="hero" className="snap-center">
-          {/* <Hero pageInfo={pageInfo} /> */}
-        </section>
+        {pageInfo ? (
+          <section id="hero" className="snap-center">
+            <Hero pageInfo={pageInfo} />
+          </section>
+        ) : null}
+        {pageInfo ? (
+          <section id="about" className="snap-center">
+            <About pageInfo={pageInfo} />
+          </section>
+        ) : null}
+        {experiences ? (
+          <section id="experience" className="snap-center">
+            <Experience experiences={experiences} />
+          </section>
+        ) : null}
+        {skills ? (
+          <section id="skills" className="snap-start">
+            <Skills skills={skills} />
+          </section>
+        ) : null}
 
-        {/* About */}
-        <section id="about" className="snap-center">
-          <About pageInfo={pageInfo} />
-        </section>
-        {/* Experience */}
-        <section id="experience" className="snap-center">
-          <Experience experiences={experiences} />
-        </section>
-        {/* Skills */}
-        <section id="skills" className="snap-start">
-          <Skills skills={skills} />
-        </section>
-        {/* Projects */}
-        {/* <section id="projects" className="snap-center"> */}
-        {/* <Projects /> */}
-        {/* </section> */}
-        {/* Contact */}
-        <section id="contact" className="snap-start">
-          <Contact pageInfo={pageInfo} />
-        </section>
+        {pageInfo ? (
+          <section id="contact" className="snap-start">
+            <Contact pageInfo={pageInfo} />
+          </section>
+        ) : null}
       </main>
 
       <Footer />
@@ -75,20 +91,3 @@ const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
 };
 
 export default Home;
-
-export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const pageInfo: PageInfo = await fetchPageInfo();
-  const experiences: ExperienceProp[] = await fetchExperience();
-  const skills: Skill[] = await fetchSkills();
-  const socials: Social[] = await fetchSocials();
-  console.log({ PI: pageInfo });
-  return {
-    props: {
-      pageInfo,
-      experiences,
-      skills,
-      socials,
-    },
-    revalidate: 10,
-  };
-};

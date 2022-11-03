@@ -4,7 +4,7 @@ import { SectionContainer, SectionTitle } from "./Reusable";
 import { PageInfo } from "../utils/typings";
 import { urlFor } from "../lib/sanity";
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo?: PageInfo;
 };
 
 const About: FC<Props> = ({ pageInfo }: Props) => {
@@ -16,7 +16,7 @@ const About: FC<Props> = ({ pageInfo }: Props) => {
       <SectionTitle title="about" />
 
       <motion.img
-        src={urlFor(pageInfo?.profilePic).url()}
+        src={pageInfo?.profilePic ? urlFor(pageInfo?.profilePic).url() : ""}
         className="-mb-20 md:mb-0 flex-shrink-0 w-44 h-44 rounded-full object-cover md:rounded-lg md:w-64 md:h-80 xl:w-[500px] xl:h-[600px] "
         width="500"
         initial={{
@@ -40,7 +40,9 @@ const About: FC<Props> = ({ pageInfo }: Props) => {
             me
           </span>
         </h4>
-        <p className="text-base text-justify">{pageInfo.about}</p>
+        <p className="text-base text-justify">
+          {pageInfo?.about ? pageInfo?.about : ""}
+        </p>
       </div>
     </SectionContainer>
   );

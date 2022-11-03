@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { PageInfo } from "../utils/typings";
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo?: PageInfo;
 };
 type Inputs = {
   name: string;
@@ -49,11 +49,11 @@ const Contact: FC<Props> = ({ pageInfo }) => {
         </h4>
 
         <div className="space-y-10 ">
-          {pageInfo.phoneNumber ? (
-            <IconText icon={<PhoneIcon />} text={pageInfo.phoneNumber} />
+          {pageInfo && pageInfo?.phoneNumber ? (
+            <IconText icon={<PhoneIcon />} text={pageInfo?.phoneNumber ?? ""} />
           ) : null}
-          {<IconText icon={<EnvelopeIcon />} text={pageInfo.email ?? ""} />}
-          {<IconText icon={<MapPinIcon />} text={pageInfo.address ?? ""} />}
+          {<IconText icon={<EnvelopeIcon />} text={pageInfo?.email ?? ""} />}
+          {<IconText icon={<MapPinIcon />} text={pageInfo?.address ?? ""} />}
         </div>
       </div>
 

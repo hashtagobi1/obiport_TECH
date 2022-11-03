@@ -7,12 +7,12 @@ import { PageInfo } from "../utils/typings";
 import { urlFor } from "../lib/sanity";
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo?: PageInfo;
 };
 
 const Hero = ({ pageInfo }: Props) => {
   const [text, count] = useTypewriter({
-    words: pageInfo.typeWriterText
+    words: pageInfo?.typeWriterText
       ? pageInfo?.typeWriterText?.split(",")
       : [""],
     loop: true,
@@ -74,10 +74,10 @@ const Hero = ({ pageInfo }: Props) => {
       >
         <motion.div variants={item} className="text-center space-y-5">
           <h2 className="uppercase  text-2xl underline font-bold">
-            {pageInfo.role}
+            {pageInfo?.role ?? ""}
           </h2>
           <h2 className="text-xl">Coded By</h2>
-          <h2 className="text-xl uppercase">{pageInfo.name}</h2>
+          <h2 className="text-xl uppercase">{pageInfo?.name ?? ""}</h2>
           <h2 className="text-xl uppercase">{getDate()}</h2>
         </motion.div>
 
@@ -105,7 +105,6 @@ const Hero = ({ pageInfo }: Props) => {
             />
           </motion.div>
         </motion.div>
-
         <motion.div
           variants={heroContainer}
           className="flex justify-around w-full p-5"

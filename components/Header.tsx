@@ -6,18 +6,8 @@ import { Social } from "../utils/typings";
 import { FC } from "react";
 
 interface Props {
-  socials: Social[];
+  socials?: Social[];
 }
-
-const renderLink = (link: string) => {
-  return (
-    <div className="mr-5 hover:underline ease-in-out transition-all duration-300">
-      <Link passHref href={`/${link}`} className="">
-        {link}
-      </Link>
-    </div>
-  );
-};
 
 const Header: FC<Props> = ({ socials }) => {
   return (
@@ -63,18 +53,20 @@ const Header: FC<Props> = ({ socials }) => {
           </div>
         </Link>
 
-        {socials.map((social, i) => {
-          return (
-            <Link passHref key={i} href={social.url ?? ""}>
-              <SocialIcon
-                fgColor="#000"
-                bgColor="#fff"
-                className=" scale-75 border rounded-full border-black/75"
-                url={social.url}
-              />
-            </Link>
-          );
-        })}
+        {socials
+          ? socials.map((social, i) => {
+              return (
+                <Link passHref key={i} href={social?.url ?? ""}>
+                  <SocialIcon
+                    fgColor="#000"
+                    bgColor="#fff"
+                    className=" scale-75 border rounded-full border-black/75"
+                    url={social?.url}
+                  />
+                </Link>
+              );
+            })
+          : null}
       </motion.div>
 
       <Link passHref href="#contact">

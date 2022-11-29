@@ -23,7 +23,7 @@ const Header: FC<Props> = ({ socials }) => {
       transition={{
         duration: 1,
       }}
-      className="sticky shadow-xl top-0 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center p-5 "
+      className="sticky shadow-lg top-0 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center p-5 "
     >
       <motion.div
         className="flex flex-row items-center space-x-3 p-1"
@@ -56,14 +56,16 @@ const Header: FC<Props> = ({ socials }) => {
         {socials
           ? socials.map((social, i) => {
               return (
-                <Link passHref key={i} href={social?.url ?? ""}>
-                  <SocialIcon
-                    fgColor="#000"
-                    bgColor="#fff"
-                    className=" scale-75 border rounded-full border-black/75"
-                    url={social?.url}
-                  />
-                </Link>
+                <div key={i} className="hidden md:block">
+                  <Link passHref href={social?.url ?? ""}>
+                    <SocialIcon
+                      fgColor="#000"
+                      bgColor="#fff"
+                      className=" scale-75 border rounded-full  border-black/75"
+                      url={social?.url}
+                    />
+                  </Link>
+                </div>
               );
             })
           : null}
@@ -86,12 +88,9 @@ const Header: FC<Props> = ({ socials }) => {
             duration: 1.8,
           }}
         >
-          <SocialIcon
-            className=" border rounded-full animate-pulse md:mr-5"
-            network="email"
-            fgColor="gray"
-            bgColor="#fff"
-          />
+          <div className="hidden md:inline-flex border rounded-full animate-pulse md:mr-5">
+            <SocialIcon network="email" fgColor="gray" bgColor="#fff" />
+          </div>
           <p className="uppercase hidden md:inline-flex text-sm">lets talk</p>
         </motion.div>
       </Link>

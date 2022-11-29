@@ -57,8 +57,8 @@ const Hero = ({ pageInfo }: Props) => {
 
   const renderHeroButtons = (linkName: string) => {
     return (
-      <Link href={`#${linkName}`} passHref>
-        <motion.button variants={item} className="heroButton">
+      <Link href={`#${linkName}`} passHref className="">
+        <motion.button variants={item} className="heroButton  ">
           {linkName}
         </motion.button>
       </Link>
@@ -70,28 +70,22 @@ const Hero = ({ pageInfo }: Props) => {
         variants={heroContainer}
         initial="hidden"
         animate="show"
-        className="flex  shadow-2xl flex-col items-center h-screen my-10 justify-center max-w-4xl mx-auto p-5"
+        className="flex h-screen flex-col items-center  my-3 justify-center max-w-4xl mx-auto p-5"
       >
         <motion.div variants={item} className="text-center space-y-5">
-          <h2 className="uppercase  text-2xl underline font-bold">
+          <h2 className="uppercase  text-2xl underline font-bold md:tracking-[3px]">
             {pageInfo?.role ?? ""}
           </h2>
-          <h2 className="text-xl">Coded By</h2>
-          <h2 className="text-xl uppercase">{pageInfo?.name ?? ""}</h2>
-          <h2 className="text-xl uppercase">{getDate()}</h2>
         </motion.div>
 
         <motion.div
           variants={item}
-          className="flex flex-col items-center justify-center my-12 space-y-6"
+          className="flex flex-col items-center max-w-full justify-center my-10 space-y-6"
         >
-          <h1>
+          <h6 className="text-md">
             <span>{text}</span>
             <Cursor />
-          </h1>
-          <p className="tracking-[15px] uppercase font-bold">
-            Software engineer
-          </p>
+          </h6>
         </motion.div>
 
         <motion.div variants={heroContainer} className="flex">
@@ -107,13 +101,14 @@ const Hero = ({ pageInfo }: Props) => {
         </motion.div>
         <motion.div
           variants={heroContainer}
-          className="flex justify-around w-full p-5"
+          className=" md:flex-row flex flex-col justify-center md:w-full p-3 "
         >
-          {renderHeroButtons("projects")}
-          {renderHeroButtons("experience")}
-          {renderHeroButtons("skills")}
-          {renderHeroButtons("blog")}
           {renderHeroButtons("about")}
+          {renderHeroButtons("experience")}
+          {renderHeroButtons("contact")}
+          {/* {renderHeroButtons("projects")} */}
+          {/* {renderHeroButtons("skills")} */}
+          {/* {renderHeroButtons("blog")} */}
         </motion.div>
       </motion.div>
     </Fragment>

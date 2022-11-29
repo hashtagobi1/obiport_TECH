@@ -17,8 +17,13 @@ const About: FC<Props> = ({ pageInfo }: Props) => {
 
       <motion.img
         src={pageInfo?.profilePic ? urlFor(pageInfo?.profilePic).url() : ""}
-        className="-mb-20 md:mb-0 flex-shrink-0 w-44 h-44 rounded-full object-cover md:rounded-lg md:w-64 md:h-80 xl:w-[500px] xl:h-[600px] "
-        width="500"
+        className="-mb-20 md:mb-0 flex-shrink-0 w-32 h-32
+        my-24
+        md:my-2
+        rounded-full object-cover md:rounded-lg 
+        md:w-64 md:h-80 
+        xl:w-[500px] xl:h-[600px] "
+        // width="500"
         initial={{
           x: 150,
           opacity: 0.3,
@@ -33,14 +38,14 @@ const About: FC<Props> = ({ pageInfo }: Props) => {
         whileInView={{ opacity: 1, x: 0 }}
       />
 
-      <div className="space-y-10 px-0 md:px-10">
-        <h4 className="text-4xl font-semibold">
+      <div className=" px-0 md:px-10">
+        <h4 className="text-xl font-semibold">
           some bits about{" "}
-          <span className="underline decoration-[#F7AB0a] underline-offset-8">
-            me
+          <span className="underline decoration-[#F7AB0a] font-bold underline-offset-4">
+            me:
           </span>
         </h4>
-        <p className="text-base text-justify">
+        <p className="text-xs md:text-base text-justify">
           {pageInfo?.about ? pageInfo?.about : ""}
         </p>
       </div>

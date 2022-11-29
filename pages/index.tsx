@@ -1,17 +1,13 @@
 import { GetStaticProps } from "next";
+import { groq } from "next-sanity";
 import Head from "next/head";
 import { FC } from "react";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import Experience from "../components/Experience";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import Skills from "../components/Skills";
-import { fetchExperience } from "../utils/fetchExperience";
-import { fetchPageInfo } from "../utils/fetchPageInfo";
-import { fetchSkills } from "../utils/fetchSkills";
-import { fetchSocials } from "../utils/fetchSocials";
+import { sanityClient } from "../lib/sanity_server";
 
 import {
   Experience as ExperienceProp,
@@ -28,10 +24,23 @@ type PageProps = {
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
-  const pageInfo: PageInfo = await fetchPageInfo();
-  const experiences: ExperienceProp[] = await fetchExperience();
-  const skills: Skill[] = await fetchSkills();
-  const socials: Social[] = await fetchSocials();
+  const exp_query = groq`*[_type == "experience"]{
+  ...,technologies[]->
+}`;
+
+  const pageInfo_query = groq`*[_type == "pageInfo"][0]`;
+  const skills_query = groq`*[_type == "skill"]`;
+  const socials_query = groq`*[_type == "social"]`;
+
+  const experiences: ExperienceProp[] = await sanityClient.fetch(exp_query);
+  const pageInfo: PageInfo = await sanityClient.fetch(pageInfo_query);
+  const skills: Skill[] = await sanityClient.fetch(skills_query);
+  const socials: Social[] = await sanityClient.fetch(socials_query);
+
+  // const pageInfo: PageInfo = await fetchPageInfo();
+  // const experiences: ExperienceProp[] = await fetchExperience();
+  // const skills: Skill[] = await fetchSkills();
+  // const socials: Social[] = await fetchSocials();
 
   return {
     props: {
@@ -72,11 +81,11 @@ const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
             <Experience experiences={experiences} />
           </section>
         ) : null}
-        {skills ? (
+        {/* {skills ? (
           <section id="skills" className="snap-start">
             <Skills skills={skills} />
           </section>
-        ) : null}
+        ) : null} */}
 
         {pageInfo ? (
           <section id="contact" className="snap-start">
@@ -85,7 +94,7 @@ const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
         ) : null}
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         typewriter: ["Courier Prime", "monospace"],
       },
+      width: {
+        seventeen: "17rem",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar")],

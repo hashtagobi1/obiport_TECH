@@ -110,6 +110,19 @@ const Hero = ({ pageInfo }: Props) => {
           {/* {renderHeroButtons("skills")} */}
           {/* {renderHeroButtons("blog")} */}
         </motion.div>
+        <motion.div>
+          <Link
+            passHref
+            className=""
+            href="https://www.dropbox.com/s/63ui0tdsblmtbiz/Obinna_Anokwuru_Resume.PDF?dl=0"
+          >
+            <a target="_blank" rel="noreferrer">
+              <p className="font-semibold  p-1 rounded-md text-lg underline-offset-2 underline tracking-wider cursor-pointer hover:text-blue-400 uppercase">
+                CV
+              </p>
+            </a>
+          </Link>
+        </motion.div>
       </motion.div>
     </Fragment>
   );

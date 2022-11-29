@@ -36,7 +36,6 @@ export const ExperienceCard: FC<{
   //     snap-center p-10 hover:opacity-100
   //     opacity-40 cursor-pointer transition-opacity duration-300 overflow-hidden
 }> = ({ exp, position }) => {
-  console.log(exp.link);
   return (
     <article
       className="
@@ -107,22 +106,18 @@ export const ExperienceCard: FC<{
 
       <div className="items-center justify-center">
         <h6 className="text-center font-bold">Summary</h6>
-        <div
-          className="px-0 border w-seventeen md:w-96 rounded-lg text-xs h-60 flex items-center
-        border-black/60 md:px-10 overflow-y-scroll customScrollBar overflow-visible"
-        >
-          <ul className="list-disc   ml-5 text-lg">
-            {exp.points
-              ? exp.points.map((point, i) => {
-                  return (
-                    <li className="text-xs" key={i}>
-                      {point}
-                    </li>
-                  );
-                })
-              : null}
-          </ul>
-        </div>
+
+        <ul className=" max-w-[250px] md:max-w-md border-black border overflow-y-scroll h-60 customScrollBar rounded list-none  ml-5 text-lg">
+          {exp.points
+            ? exp.points.map((point, i) => {
+                return (
+                  <li className="text-xs m-2" key={i}>
+                    {point}
+                  </li>
+                );
+              })
+            : null}
+        </ul>
       </div>
     </article>
   );

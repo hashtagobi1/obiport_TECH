@@ -3,6 +3,8 @@ import { SectionContainer, SectionTitle } from "./Reusable";
 import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PageInfo } from "../utils/typings";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 type Props = {
   pageInfo?: PageInfo;
@@ -19,10 +21,25 @@ const Contact: FC<Props> = ({ pageInfo }) => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
-    window.location.href = `mailto:anokwuruobi@gmail.com?subject=${formData.subject}&body=Hi Obi My name is ${formData.name}. \n ${formData.message} [from (${formData.email})]`;
+    console.log({ formData });
+    reset();
+    Swal.fire({
+      title: "Message Delivered!",
+      icon: "success",
+      timer: 1500,
+    });
+
+    axios
+      .post("https://eonaosul7i6f5sy.m.pipedream.net", formData)
+      .then((response) => {
+        console.log({ response });
+      })
+      .catch((e) => console.error(e));
+    // window.location.href = `mailto:anokwuruobi@gmail.com?subject=${formData.subject}&body=Hi Obi My name is ${formData.name}. \n ${formData.message} [from (${formData.email})]`;
   };
 
   const IconText: FC<{ icon: JSX.Element; text: string }> = ({
@@ -68,23 +85,27 @@ const Contact: FC<Props> = ({ pageInfo }) => {
           {...register("name")}
           placeholder="Name"
           className="contactInput max-w-2xl"
+          required
           type="text"
         />
         <input
           {...register("email")}
           placeholder="Email"
           className="contactInput"
+          required
           type="email"
         />
         <input
           {...register("subject")}
           placeholder="Subject"
           className="contactInput"
+          required
           type="text"
         />
         <textarea
           {...register("message")}
           placeholder="Message"
+          required
           className="contactInput"
         />
         <button

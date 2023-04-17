@@ -114,7 +114,7 @@ const Hero = ({ pageInfo }: Props) => {
           <Link
             passHref
             className=""
-            href="https://www.dropbox.com/s/4y1x29k91215tji/Obinna_Anokwuru_Resume.PDF?dl=0"
+            href="https://www.dropbox.com/s/067hzog1c3qci4t/Obinna_Anokwuru_-_Front_End_Development_NEW.pdf?dl=0"
           >
             <a target="_blank" rel="noreferrer">
               <p className="font-semibold  p-1 rounded-md text-lg underline-offset-2 underline tracking-wider cursor-pointer hover:text-blue-400 uppercase">

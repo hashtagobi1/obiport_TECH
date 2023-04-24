@@ -103,10 +103,10 @@ const Hero = ({ pageInfo }: Props) => {
           variants={heroContainer}
           className=" md:flex-row flex flex-col justify-center md:w-full p-3 "
         >
-          {renderHeroButtons("about")}
+          {renderHeroButtons("projects")}
           {renderHeroButtons("experience")}
+          {renderHeroButtons("about")}
           {renderHeroButtons("contact")}
-          {/* {renderHeroButtons("projects")} */}
           {/* {renderHeroButtons("skills")} */}
           {/* {renderHeroButtons("blog")} */}
         </motion.div>

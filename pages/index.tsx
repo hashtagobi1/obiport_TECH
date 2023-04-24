@@ -12,15 +12,18 @@ import { sanityClient } from "../lib/sanity_server";
 import {
   Experience as ExperienceProp,
   PageInfo,
+  Project,
   Skill,
   Social,
 } from "../utils/typings";
+import Projects from "../components/Projects";
 
 type PageProps = {
   pageInfo?: PageInfo;
   experiences?: ExperienceProp[];
   skills?: Skill[];
   socials?: Social[];
+  projects?: Project[];
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
@@ -31,11 +34,13 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
   const pageInfo_query = groq`*[_type == "pageInfo"][0]`;
   const skills_query = groq`*[_type == "skill"]`;
   const socials_query = groq`*[_type == "social"]`;
+  const project_query = groq`*[_type == "project"]`;
 
   const experiences: ExperienceProp[] = await sanityClient.fetch(exp_query);
   const pageInfo: PageInfo = await sanityClient.fetch(pageInfo_query);
   const skills: Skill[] = await sanityClient.fetch(skills_query);
   const socials: Social[] = await sanityClient.fetch(socials_query);
+  const projects: Project[] = await sanityClient.fetch(project_query);
 
   // const pageInfo: PageInfo = await fetchPageInfo();
   // const experiences: ExperienceProp[] = await fetchExperience();
@@ -48,11 +53,19 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       experiences,
       skills,
       socials,
+      projects,
     },
     revalidate: 10,
   };
 };
-const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
+const Home: FC<PageProps> = ({
+  experiences,
+  pageInfo,
+  skills,
+  socials,
+  projects,
+}) => {
+  console.log({ projects });
   return (
     <div
       className="font-typewriter bg-[#F8F8F8] h-screen snap-y snap-mandatory overflow-y-scroll 
@@ -71,14 +84,19 @@ const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
             <Hero pageInfo={pageInfo} />
           </section>
         ) : null}
-        {pageInfo ? (
-          <section id="about" className="snap-center">
-            <About pageInfo={pageInfo} />
+        {projects ? (
+          <section id="projects" className="snap-center">
+            <Projects projects={projects} />
           </section>
         ) : null}
         {experiences ? (
           <section id="experience" className="snap-center">
             <Experience experiences={experiences} />
+          </section>
+        ) : null}
+        {pageInfo ? (
+          <section id="about" className="snap-center">
+            <About pageInfo={pageInfo} />
           </section>
         ) : null}
         {/* {skills ? (

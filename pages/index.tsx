@@ -1,9 +1,9 @@
 import { GetStaticProps } from "next";
 import { groq } from "next-sanity";
 import Head from "next/head";
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { sanityClient } from "../lib/sanity_server";
-
+import Lenis from "@studio-freight/lenis";
 import {
   Experience as ExperienceProp,
   PageInfo,
@@ -12,6 +12,7 @@ import {
   Social,
 } from "../utils/typings";
 import Card from "../components/Card";
+import { useScroll } from "framer-motion";
 
 type PageProps = {
   pageInfo?: PageInfo;
@@ -60,7 +61,26 @@ const Home: FC<PageProps> = ({
   socials,
   projects,
 }) => {
-  console.log({ projects });
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    lenis.on("scroll", (e: any) => {
+      console.log(e);
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  });
   return (
     <div
       className="font-typewriter bg-[#F8F8F8]    
@@ -84,13 +104,25 @@ const Home: FC<PageProps> = ({
             <Projects projects={projects} />
           </section>
         ) : null} */}
+        <section ref={container} className="mt=[50vh] mb-[100vh]">
+          {experiences
+            ? experiences.reverse().map((exp, i) => {
+                const targetScale = 1 - (experiences.length - i) * 0.05;
 
-        {experiences
-          ? experiences
-              .reverse()
-              .map((exp, i) => <Card key={exp._id} {...exp} />)
-          : // <Experience experiences={experiences} />
-            null}
+                return (
+                  <Card
+                    progress={scrollYProgress}
+                    targetScale={targetScale}
+                    range={[i * 0.25, 1]}
+                    i={i}
+                    key={exp._id}
+                    data={exp}
+                  />
+                );
+              })
+            : // <Experience experiences={experiences} />
+              null}
+        </section>
         {/* {pageInfo ? (
           <section id="about" className="">
             <About pageInfo={pageInfo} />

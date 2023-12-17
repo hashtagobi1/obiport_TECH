@@ -24,6 +24,7 @@
     "@heroicons/react": "^2.0.12",
     "@portabletext/react": "^1.0.6",
     "@sanity/image-url": "^1.0.1",
+    "@studio-freight/lenis": "^1.0.29",
     "autoprefixer": "^10.4.12",
     "axios": "^1.2.0",
     "framer-motion": "^7.5.4",

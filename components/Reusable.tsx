@@ -36,7 +36,6 @@ export const ExperienceCard: FC<{
   //     snap-center p-10 hover:opacity-100
   //     opacity-40 cursor-pointer transition-opacity duration-300 overflow-hidden
 }> = ({ exp, position, bgColor }) => {
-  console.log({ bgColor });
   return (
     <article
       className={` flex flex-col items-center justify-center sticky top-0 h-[100vh]  `}

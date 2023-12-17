@@ -19,7 +19,6 @@ function createHexCode(id: string) {
 
   // Concatenate the values to form a hex color code
   var hexCode = "#" + rHex + gHex + bHex;
-  console.log({ hexCode });
 
   return hexCode;
 }

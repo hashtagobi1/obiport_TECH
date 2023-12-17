@@ -2,7 +2,6 @@ import { FC } from "react";
 import { motion } from "framer-motion";
 import { Experience, Skill as SkillProps } from "../utils/typings";
 import { urlFor } from "../lib/sanity";
-import Image from "next/image";
 import Link from "next/link";
 
 export const SectionTitle: FC<{ title: string; classes?: string }> = ({
@@ -18,7 +17,7 @@ export const SectionContainer: FC<{ classes: string }> = ({
 }) => {
   return (
     <motion.div
-      className={` ${classes}`}
+      className={`w-[1000px] h-[500px]`}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
@@ -31,26 +30,22 @@ export const SectionContainer: FC<{ classes: string }> = ({
 export const ExperienceCard: FC<{
   exp: Experience;
   position: number;
+  bgColor: string;
 
   //     w-[500px] md:w-[600px] xl:w-[900px]
   //     snap-center p-10 hover:opacity-100
   //     opacity-40 cursor-pointer transition-opacity duration-300 overflow-hidden
-}> = ({ exp, position }) => {
+}> = ({ exp, position, bgColor }) => {
+  console.log({ bgColor });
   return (
     <article
-      className="
-      mt-20
-      flex flex-col items-center justify-center shadow-xl
-      snap-mandatory snap-center
-      rounded-lg
-      space-y-3
-      md:p-20
-      p-1
-      opacity-40 hover:opacity-100
-      flex-shrink-0
-      cursor-pointer"
+      className={` flex flex-col items-center justify-center sticky top-0 h-[100vh]  `}
     >
-      <motion.img
+      <div
+        style={{ backgroundColor: bgColor }}
+        className="w-[1000px] h-[500px]   border rounded-xl border-pink-500 "
+      >
+        {/* <motion.img
         initial={{
           y: -100,
           opacity: 0,
@@ -63,17 +58,17 @@ export const ExperienceCard: FC<{
         className="w-12 h-12 md:w-32 md:h-32 rounded-full xl:w-[200px] xl:h-[200px] object-cover object-center"
         src={urlFor(exp.companyImage).url()}
         alt="logo"
-      />
-      <h4 className="md:text-4xl font-light text-center">{exp.jobTitle}</h4>
-      <Link href={exp.link} passHref>
-        <p className="font-bold md:text-2xl text-blue-600 underline text-center">
-          {exp.company}
-        </p>
-      </Link>
-      <div className="flex space-x-2 items-center justify-center">
+      /> */}
+        {/* <h4 className="md:text-4xl font-light text-center">{exp.jobTitle}</h4> */}
+        <Link href={exp.link} passHref className="cursor-pointer">
+          <p className="font-bold md:text-2xl text-blue-600 underline text-center">
+            {exp.company}
+          </p>
+        </Link>
+        {/* <div className="flex space-x-2 items-center justify-center">
         <h6 className="tracking-widest text-xs md:text-base">Tech Used:</h6>
-      </div>
-      <div className="flex justify-between ">
+      </div> */}
+        {/* <div className="flex justify-between ">
         {exp.technologies &&
           exp.technologies.map((tech, i) => {
             return (
@@ -87,9 +82,9 @@ export const ExperienceCard: FC<{
                 />
               </div>
             );
-          })}
-      </div>
-      {/* <p className="uppercase p-0  text-xs flex text-gray-800 text-center tracking-tighter font-light">
+          })} */}
+        {/* </div> */}
+        {/* <p className="uppercase p-0  text-xs flex text-gray-800 text-center tracking-tighter font-light">
         <span className="">
           {exp.dateStarted ? new Date(exp.dateStarted).toDateString() : " "}
         </span>
@@ -104,7 +99,7 @@ export const ExperienceCard: FC<{
         </span>
       </p> */}
 
-      <div className="items-center justify-center">
+        {/* <div className="items-center justify-center">
         <h6 className="text-center font-bold">Summary</h6>
 
         <ul className=" max-w-[250px] md:max-w-md border-black border overflow-y-scroll h-60 customScrollBar rounded list-none  ml-5 text-lg">
@@ -118,6 +113,7 @@ export const ExperienceCard: FC<{
               })
             : null}
         </ul>
+      </div> */}
       </div>
     </article>
   );

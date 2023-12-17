@@ -2,11 +2,6 @@ import { GetStaticProps } from "next";
 import { groq } from "next-sanity";
 import Head from "next/head";
 import { FC } from "react";
-import About from "../components/About";
-import Contact from "../components/Contact";
-import Experience from "../components/Experience";
-import Header from "../components/Header";
-import Hero from "../components/Hero";
 import { sanityClient } from "../lib/sanity_server";
 
 import {
@@ -16,7 +11,7 @@ import {
   Skill,
   Social,
 } from "../utils/typings";
-import Projects from "../components/Projects";
+import Card from "../components/Card";
 
 type PageProps = {
   pageInfo?: PageInfo;
@@ -68,8 +63,8 @@ const Home: FC<PageProps> = ({
   console.log({ projects });
   return (
     <div
-      className="font-typewriter bg-[#F8F8F8] h-screen snap-y snap-mandatory overflow-y-scroll 
-    overflow-x-hidden z-0 customScrollBar"
+      className="font-typewriter bg-[#F8F8F8]    
+     customScrollBar"
     >
       <Head>
         <title>obi tech portfolio</title>
@@ -77,39 +72,41 @@ const Home: FC<PageProps> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {socials ? <Header socials={socials} /> : null}
-      <main>
-        {pageInfo ? (
-          <section id="hero" className="snap-center">
+      {/* {socials ? <Header socials={socials} /> : null} */}
+      <main className="mt=[50vh] mb-[100vh]">
+        {/* {pageInfo ? (
+          <section id="hero" className="">
             <Hero pageInfo={pageInfo} />
           </section>
-        ) : null}
-        {projects ? (
-          <section id="projects" className="snap-center">
+        ) : null} */}
+        {/* {projects ? (
+          <section id="projects" className="">
             <Projects projects={projects} />
           </section>
-        ) : null}
-        {experiences ? (
-          <section id="experience" className="snap-center">
-            <Experience experiences={experiences} />
-          </section>
-        ) : null}
-        {pageInfo ? (
-          <section id="about" className="snap-center">
+        ) : null} */}
+
+        {experiences
+          ? experiences
+              .reverse()
+              .map((exp, i) => <Card key={exp._id} {...exp} />)
+          : // <Experience experiences={experiences} />
+            null}
+        {/* {pageInfo ? (
+          <section id="about" className="">
             <About pageInfo={pageInfo} />
           </section>
-        ) : null}
+        ) : null} */}
         {/* {skills ? (
           <section id="skills" className="snap-start">
             <Skills skills={skills} />
           </section>
         ) : null} */}
 
-        {pageInfo ? (
-          <section id="contact" className="snap-start">
+        {/* {pageInfo ? (
+          <section id="contact" className="">
             <Contact pageInfo={pageInfo} />
           </section>
-        ) : null}
+        ) : null} */}
       </main>
 
       {/* <Footer /> */}

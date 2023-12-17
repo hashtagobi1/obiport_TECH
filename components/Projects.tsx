@@ -14,7 +14,7 @@ const Projects = ({ projects }: Props) => {
     >
       <SectionTitle title="projects" />
 
-      <div className="relative customScrollBar w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 ">
+      <div className="relative customScrollBar w-full flex overflow-x-scroll overflow-y-hidden  z-20 ">
         {projects.map((project, i) => (
           <ProjectCard project={project} key={i} />
         ))}

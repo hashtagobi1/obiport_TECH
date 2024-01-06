@@ -101,6 +101,7 @@ const Contact: FC<Props> = ({ pageInfo }) => {
       </div>
 
       <form
+        //@ts-ignore
         ref={form}
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col space-y-2 w-fit mx-auto"

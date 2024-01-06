@@ -5,6 +5,7 @@
   "lint-staged": {
     "**/*": "prettier --write . --ignore-unknown"
   },
+  "license": "BSD-3-Clause",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

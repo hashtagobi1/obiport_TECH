@@ -38,10 +38,10 @@ export const SectionTitle: FC<{ title: string; classes?: string }> = ({
   return <h3 className={`${classes}`}>{title}</h3>;
 };
 
-export const SectionContainer: FC<{ classes: string }> = ({
-  children,
-  classes,
-}) => {
+export const SectionContainer: FC<{
+  classes: string;
+  children: React.ReactNode;
+}> = ({ children, classes }) => {
   return (
     <motion.div
       className={` ${classes}`}

@@ -81,9 +81,9 @@ const Contact: FC<Props> = ({ pageInfo }) => {
       <SectionTitle title="contact" />
 
       <div className="flex flex-col mt-24 space-y-10">
-        <h4 className="text-md mt-24 max-w-xs text-center">
+        {/* <h4 className="text-md mt-24 max-w-xs text-center">
           looking for a creative open minded addition to your team?
-        </h4>
+        </h4> */}
         <span
           className="text-xl mt-20 font-semibold text-center 
         underline decoration-[#F7AB0a] underline-offset-8 animate-pulse"

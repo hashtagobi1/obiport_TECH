@@ -45,7 +45,7 @@ const About: FC<Props> = ({ pageInfo }: Props) => {
             me:
           </span>
         </h4>
-        <p className="text-xs md:text-base text-justify">
+        <p className="text-xs md:text-base leading-5 md:leading-9">
           {pageInfo?.about ? pageInfo?.about : ""}
         </p>
       </div>

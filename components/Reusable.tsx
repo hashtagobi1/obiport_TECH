@@ -9,6 +9,32 @@ export const SectionTitle: FC<{ title: string; classes?: string }> = ({
   title,
   classes = "absolute my-6 top-24 uppercase tracking-[24px] font-bold text-center text-gray-500 text-4xl",
 }) => {
+  // if (title === "experience") {
+  //   return (
+  //     <div className={`${classes} flex flex-col`}>
+  //       <h3 className={``}>{title}</h3>
+  //       <div className="flex items-center justify-center mt-6 gap-5">
+  //         <span className="text-sm  tracking-tight">Swipe to see more</span>
+  //         <span>
+  //           <svg
+  //             xmlns="http://www.w3.org/2000/svg"
+  //             fill="none"
+  //             viewBox="0 0 24 24"
+  //             strokeWidth={1.5}
+  //             stroke="currentColor"
+  //             className="w-6 h-6"
+  //           >
+  //             <path
+  //               strokeLinecap="round"
+  //               strokeLinejoin="round"
+  //               d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+  //             />
+  //           </svg>
+  //         </span>
+  //       </div>
+  //     </div>
+  //   );
+  // }
   return <h3 className={`${classes}`}>{title}</h3>;
 };
 
@@ -45,7 +71,7 @@ export const ExperienceCard: FC<{
       rounded-lg
       space-y-3
       md:p-20
-      p-1
+      p-9
       opacity-40 hover:opacity-100
       flex-shrink-0
       cursor-pointer"

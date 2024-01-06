@@ -27,8 +27,10 @@ const Experience: FC<Props> = ({ experiences }) => {
             })
           : ""}
       </div>
-      <div className="flex absolute bottom-5 items-center justify-center mt-6 gap-5">
-        <span className="text-sm  tracking-tight">swipe to see more</span>
+      <div className="flex absolute bottom-5 animate-pulse items-center justify-center mt-6 gap-5">
+        <span className="text-sm md:text-xl  tracking-tight">
+          swipe to see more
+        </span>
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

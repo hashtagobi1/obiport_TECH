@@ -1,11 +1,10 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { SectionContainer, SectionTitle } from "./Reusable";
 import { PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PageInfo } from "../utils/typings";
 import Swal from "sweetalert2";
-import axios from "axios";
-
+import emailjs from "@emailjs/browser";
 type Props = {
   pageInfo?: PageInfo;
 };
@@ -17,6 +16,7 @@ type Inputs = {
 };
 
 const Contact: FC<Props> = ({ pageInfo }) => {
+  const form = useRef();
   const {
     register,
     handleSubmit,
@@ -24,21 +24,44 @@ const Contact: FC<Props> = ({ pageInfo }) => {
     reset,
     formState: { errors },
   } = useForm<Inputs>();
+
+  useEffect(() => {
+    emailjs.init("A2r4n0dcXyRi5aj7v");
+  });
+
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
     console.log({ formData });
-    reset();
-    Swal.fire({
-      title: "Message Delivered!",
-      icon: "success",
-      timer: 1500,
-    });
+    console.log({ Ref: form.current });
 
-    axios
-      .post("https://eonaosul7i6f5sy.m.pipedream.net", formData)
-      .then((response) => {
-        console.log({ response });
-      })
-      .catch((e) => console.error(e));
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "contact_service",
+          "template_bvsyop9",
+          form.current,
+          "A2r4n0dcXyRi5aj7v"
+        )
+        .then((result) => {
+          console.log({ result });
+          reset();
+
+          Swal.fire({
+            title: `Thanks ${formData.name}!`,
+            icon: "success",
+            timer: 4000,
+            text: `Your message has been delivered and we will speak to you soon.`,
+          });
+        })
+        .catch((e) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            // text: `Something went wrong!  ${error.message}`,
+          });
+          console.error(e);
+        });
+    }
+
     // window.location.href = `mailto:anokwuruobi@gmail.com?subject=${formData.subject}&body=Hi Obi My name is ${formData.name}. \n ${formData.message} [from (${formData.email})]`;
   };
 
@@ -78,6 +101,7 @@ const Contact: FC<Props> = ({ pageInfo }) => {
       </div>
 
       <form
+        ref={form}
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col space-y-2 w-fit mx-auto"
       >

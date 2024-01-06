@@ -1,12 +1,9 @@
-import { Project } from "../utils/typings";
-import ProjectCard from "./ProjectCard";
 import { SectionContainer, SectionTitle } from "./Reusable";
 
-type Props = {
-  projects: Project[];
-};
+type Props = {};
 
-const Projects = ({ projects }: Props) => {
+const Projects = (props: Props) => {
+  const proj = [1, 1, 1, 1, 1];
   return (
     <SectionContainer
       classes="h-screen flex relative flex-col text-center overflow-hidden text-left md:flex-row   
@@ -18,7 +15,7 @@ const Projects = ({ projects }: Props) => {
         {projects.map((project, i) => (
           <ProjectCard project={project} key={i} />
         ))}
-      </div>
+      </div> */}
 
       <div className="w-full absolute top-[30%] bg-gray-900/5 left-0 h-[500px] -skew-y-12 "></div>
     </SectionContainer>

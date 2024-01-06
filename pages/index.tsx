@@ -7,19 +7,19 @@ import Lenis from "@studio-freight/lenis";
 import {
   Experience as ExperienceProp,
   PageInfo,
-  Project,
   Skill,
   Social,
 } from "../utils/typings";
-import Card from "../components/Card";
+<<<<<<< HEAD
 import { useScroll } from "framer-motion";
+=======
+>>>>>>> parent of e0289bf (added project section)
 
 type PageProps = {
   pageInfo?: PageInfo;
   experiences?: ExperienceProp[];
   skills?: Skill[];
   socials?: Social[];
-  projects?: Project[];
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
@@ -30,13 +30,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
   const pageInfo_query = groq`*[_type == "pageInfo"][0]`;
   const skills_query = groq`*[_type == "skill"]`;
   const socials_query = groq`*[_type == "social"]`;
-  const project_query = groq`*[_type == "project"]`;
 
   const experiences: ExperienceProp[] = await sanityClient.fetch(exp_query);
   const pageInfo: PageInfo = await sanityClient.fetch(pageInfo_query);
   const skills: Skill[] = await sanityClient.fetch(skills_query);
   const socials: Social[] = await sanityClient.fetch(socials_query);
-  const projects: Project[] = await sanityClient.fetch(project_query);
 
   // const pageInfo: PageInfo = await fetchPageInfo();
   // const experiences: ExperienceProp[] = await fetchExperience();
@@ -49,11 +47,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       experiences,
       skills,
       socials,
-      projects,
     },
     revalidate: 10,
   };
 };
+<<<<<<< HEAD
 const Home: FC<PageProps> = ({
   experiences,
   pageInfo,
@@ -81,6 +79,9 @@ const Home: FC<PageProps> = ({
 
     requestAnimationFrame(raf);
   });
+=======
+const Home: FC<PageProps> = ({ experiences, pageInfo, skills, socials }) => {
+>>>>>>> parent of e0289bf (added project section)
   return (
     <div
       className="font-typewriter bg-[#F8F8F8]    
@@ -98,36 +99,17 @@ const Home: FC<PageProps> = ({
           <section id="hero" className="">
             <Hero pageInfo={pageInfo} />
           </section>
-        ) : null} */}
-        {/* {projects ? (
-          <section id="projects" className="">
-            <Projects projects={projects} />
-          </section>
-        ) : null} */}
-        <section ref={container} className="mt=[50vh] mb-[100vh]">
-          {experiences
-            ? experiences.reverse().map((exp, i) => {
-                const targetScale = 1 - (experiences.length - i) * 0.05;
-
-                return (
-                  <Card
-                    progress={scrollYProgress}
-                    targetScale={targetScale}
-                    range={[i * 0.25, 1]}
-                    i={i}
-                    key={exp._id}
-                    data={exp}
-                  />
-                );
-              })
-            : // <Experience experiences={experiences} />
-              null}
-        </section>
-        {/* {pageInfo ? (
-          <section id="about" className="">
+        ) : null}
+        {pageInfo ? (
+          <section id="about" className="snap-center">
             <About pageInfo={pageInfo} />
           </section>
-        ) : null} */}
+        ) : null}
+        {experiences ? (
+          <section id="experience" className="snap-center">
+            <Experience experiences={experiences} />
+          </section>
+        ) : null}
         {/* {skills ? (
           <section id="skills" className="snap-start">
             <Skills skills={skills} />
